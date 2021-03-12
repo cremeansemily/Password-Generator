@@ -1,97 +1,82 @@
 // Assignment code here
 
-// variable for password
-
-var pw = "";
-
-var lowercaseselection = false;
-var uppercaseselection = false;
-var specialcharselection = false;
-var numberselection = false;
-
-var lowercase = "abcdefghijklmnopqrstuvwxyz";
+// variables for password
+  
 var uppercase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-var specialchar = "!@#$%^&*()-_=+[{}]\|;:',<>./?";
-var number = "1234567890";
+var lowercase = "abcdefghijklmnopqrstuvwxyz";
+var number = "0123456789";
+var symbols = "!@#$%^&*()_+-=[]\{}|<:;.>?/";
 
-// password generator
+
+var uppercaseArray = uppercase.split("");
+var lowercaseArray = lowercase.split("");
+var numberArray = number.split("");
+var symbolArray = symbols.split("");
+
+// Main function = Password Generation
 
 function generate(){
-    var confirmlength = "";}
-    while (isNaN(confirmlength)| confirmlength < 8 |confirmlength > 128)
-    {
-        confirmlength = prompt("What length do you want the password to be? (Between 8 - 128 characters)");
-        if (confirmlength === null) 
-        {
-            break;
-        }
-    }
+ var allChars = [];
+ var resultPass = "";
 
-// user seclection variables
 
-if(confirmlength) {
-    if(confirm("Do you want to use lowercase characters?") == true) 
-    { 
-        lowercaseselection = true
-    }
-    if(confirm("Do you want to use uppercase characters?") == true)
-    {
-        uppercaseselection = true
-    }
-    if(confirm("Do you want to use special characters?") == true)
-    {
-        specialcharselection = true
-    }
-    if(confirm("Do you want to use numerical characters?") == true)
-    {
-        numberselection = true
-    }
-    if (lowercaseselection === false && uppercaseselection === false && specialcharselection === flase && numberselection ===false)
-    {
-        alert("One character selction must be chosen")
-    }
+// 
+
+ var Totallength = prompt("How long do you want your password to be? Must be between 8-128 characters");
+
+ if(Totallength <8 || Totallength > 128){
+     alert("Select a password that is between 8-128 characters.");
+ }
+
+// Confirm the rest of character conditions
+ 
+ else{
+     if(confirm("Do you want the password to contain uppercase letters?"))
+     {
+         Array.prototype.push.apply(allChars, uppercaseArray);
+     }
+
+     if(confirm("Do you want the password to contain lowercase letters?"))
+     {
+         Array.prototype.push.apply(allChars, lowercaseArray);
+     }
+
+     if(confirm("Do you want the password to contain numbers?"))
+     {
+         Array.prototype.push.apply(allChars, numberArray);
+     }
+
+     if(confirm("Do you want the password to contain any symbols or special characters?"))
+     {
+         Array.prototype.push.apply(allChars, symbolArray);
+     }
+
+     if(allChars.length===0)
+     {
+         alert("you must choose at least one selection");
+     }
+
+// generate password
+
+     else{
+         for(var i=0; i<Totlength; i++)
+         {
+             var random = Math.floor(Math.random()*allChars.length);
+             resultPass += allChars[random];
+         }
+     }
+     }
+
+// Display the result
+
+     document.getElementById("password").innerHTML = resultPass;
 }
+ // Copy Button
 
-// generation
+function Copy(){
 
-var characters = "";
-characters += (lowercaseselection ? lowercase: "");
-characters += (uppercaseselection ? uppercase: "");
-characters += (specialcharselection ? specialchar: "");
-characters += (numberselection ? number: "");
+    document.querySelector("textarea").select();
+    document.execCommand("Copy");
+    alert("Password copied to clipboard!");
+   }
 
-pw = Password(confirmlength, characters);
-
-document.getElementById("Password").innerHTML = pw;
-
-function password(characters)
-{
-    var pw = "";
-    for (var i=0; 1/i > 0; i++)
-    {
-        pw += characters.charat(math.floor(math.random)) * characters.length;
-    }
-    return pw;
-}
-
-
-// Get references to the #generate element
-var generateBtn = document.querySelector("#generate");
-
-// Write password to the #password input
-function writePassword() {
-  var password = generatePassword();
-  var passwordText = document.querySelector("#password");
-
-  passwordText.value = password;
-
-}
-
-function copied() {
-    document.getElementById("password").select();
-    document.execCommand("copy");
-    alert("The password has been copied.");
-}
-
-// Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
