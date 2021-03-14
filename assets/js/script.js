@@ -27,7 +27,7 @@ function generate(){
      alert("Select a password that is between 8-128 characters.");
  }
 
-// characters
+// confirm prompts
  
  else{
      if(confirm("Do you want the password to contain uppercase letters?"))
@@ -50,7 +50,7 @@ function generate(){
          Array.prototype.push.apply(characters, symbolArray);
      }
 
-     if(characters.length=0)
+     if(characters.length===0)
      {
          alert("you must choose at least one selection");
      }
