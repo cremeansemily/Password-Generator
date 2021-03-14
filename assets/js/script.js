@@ -14,13 +14,12 @@ var numberArray = number.split("");
 var symbolArray = symbols.split("");
 
 // Main function = Password Generation
-
 function generate(){
- var allChars = [];
- var resultPass = "";
+    var characters = [];
+    var result = "";
 
 
-// 
+// password length prompt
 
  var Totallength = prompt("How long do you want your password to be? Must be between 8-128 characters");
 
@@ -28,55 +27,61 @@ function generate(){
      alert("Select a password that is between 8-128 characters.");
  }
 
-// Confirm the rest of character conditions
+// characters
  
  else{
      if(confirm("Do you want the password to contain uppercase letters?"))
      {
-         Array.prototype.push.apply(allChars, uppercaseArray);
+         Array.prototype.push.apply(characters, uppercaseArray);
      }
 
      if(confirm("Do you want the password to contain lowercase letters?"))
      {
-         Array.prototype.push.apply(allChars, lowercaseArray);
+         Array.prototype.push.apply(characters, lowercaseArray);
      }
 
      if(confirm("Do you want the password to contain numbers?"))
      {
-         Array.prototype.push.apply(allChars, numberArray);
+         Array.prototype.push.apply(characters, numberArray);
      }
 
      if(confirm("Do you want the password to contain any symbols or special characters?"))
      {
-         Array.prototype.push.apply(allChars, symbolArray);
+         Array.prototype.push.apply(characters, symbolArray);
      }
 
-     if(allChars.length===0)
+     if(characters.length=0)
      {
          alert("you must choose at least one selection");
      }
 
-// generate password
 
-     else{
-         for(var i=0; i<Totlength; i++)
-         {
-             var random = Math.floor(Math.random()*allChars.length);
-             resultPass += allChars[random];
-         }
-     }
-     }
-
-// Display the result
-
-     document.getElementById("password").innerHTML = resultPass;
+else{
+     for(var i=0; i<Totallength; i++)
+    {
+     var random = Math.floor(Math.random()*characters.length);
+    result += characters[random];
+    }
+    }
 }
- // Copy Button
 
-function Copy(){
+    document.getElementById("password").innerHTML = result;
+}
+ 
 
-    document.querySelector("textarea").select();
-    document.execCommand("Copy");
-    alert("Password copied to clipboard!");
-   }
+// Get references to the #generate element
+    var generateBtn = document.querySelector("#generate");
 
+// Write password to the #password input
+    function writePassword() {
+    var password = generatePassword();
+    var passwordText = document.querySelector("#password");
+
+  passwordText.value = password;
+
+}
+
+// Add event listener to generate button
+generateBtn.addEventListener("click", writePassword);
+   
+   
