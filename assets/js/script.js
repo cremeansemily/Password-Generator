@@ -18,7 +18,6 @@ function generate(){
     var characters = [];
     var result = "";
 
-
 // password length prompt
 
  var Totallength = prompt("How long do you want your password to be? Must be between 8-128 characters");
